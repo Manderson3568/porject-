@@ -6,7 +6,7 @@ class AbilitiesController < ApplicationController
         end
     end
     def upload
-        raise "hell"
+
     end
     def index
     end

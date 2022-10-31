@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :natures, :only => [:show,:edit,:index]
   resources :items, :only => [:show,:edit,:index]
   resources :attacks, :only => [:show,:edit,:index]
-  resources :pokemons
+  resources :pokemon
   resources :users, :only => [:new, :create, :index]
   get '/login' => 'session#new'
   post '/login' => 'session#create'

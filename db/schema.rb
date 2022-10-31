@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_030709) do
+ActiveRecord::Schema.define(version: 2022_10_31_021600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_030709) do
     t.text "info"
   end
 
-  create_table "abilities_pokemons", id: false, force: :cascade do |t|
+  create_table "abilities_pokemon", id: false, force: :cascade do |t|
     t.integer "ability_id"
     t.integer "pokemon_id"
   end
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_030709) do
     t.integer "accuracy"
   end
 
-  create_table "attacks_pokemons", id: false, force: :cascade do |t|
+  create_table "attacks_pokemon", id: false, force: :cascade do |t|
     t.integer "attack_id"
     t.integer "pokemon_id"
   end
@@ -60,8 +60,9 @@ ActiveRecord::Schema.define(version: 2022_10_31_030709) do
     t.string "minus"
   end
 
-  create_table "pokemons", force: :cascade do |t|
+  create_table "pokemon", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.integer "species_id"
     t.integer "nature_id"
     t.integer "item_id"
@@ -79,10 +80,9 @@ ActiveRecord::Schema.define(version: 2022_10_31_030709) do
     t.integer "iv_speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
-  create_table "pokemons_teams", force: :cascade do |t|
+  create_table "pokemon_teams", id: false, force: :cascade do |t|
     t.integer "pokemon_id"
     t.integer "team_id"
   end
@@ -100,9 +100,9 @@ ActiveRecord::Schema.define(version: 2022_10_31_030709) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

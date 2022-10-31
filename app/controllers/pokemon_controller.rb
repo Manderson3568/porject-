@@ -1,4 +1,4 @@
-class PokemonsController < ApplicationController
+class PokemonController < ApplicationController
     def new
         @pokemon = Pokemon.new
     end
