@@ -1,0 +1,60 @@
+<h1><%= @pokemon.name.capitalize %></h1>
+
+<div class="info">
+    <p>Pokemon: <%= @pokemon.species.name %></p>
+    <p>Nature: <%= @pokemon.nature.name if !@pokemon.nature.nil? %></p>
+    <p>Item: <%= @pokemon.item.name if !@pokemon.item.nil?%></p>
+</div>
+
+<h2>Attacks</h2>
+<div class="attacks">
+    <% @pokemon.attacks.each do |attack| %>
+        <div class="attack">
+            <p>
+                <%= attack.name %>
+                <%= attack.element_type %>
+                <%= attack.category %>
+                <%= attack.pp %>
+                <%= attack.power %>
+                <%= attack.accuracy %>
+            </p>
+        </div>
+    <% end %>
+</div>
+
+<h2>IVs</h2>
+<div class="ivs">
+    <div><p>HP</p></div>
+    <div><p>Att</p></div>
+    <div><p>Def</p></div>
+    <div><p>Sp.Atk</p></div>
+    <div><p>Sp.Def</p></div>
+    <div><p>Spe</p></div>
+    <div><%= @pokemon.iv_hp %></div>
+    <div><%= @pokemon.iv_attack %></div>
+    <div><%= @pokemon.iv_defense %></div>
+    <div><%= @pokemon.iv_spatk %></div>
+    <div><%= @pokemon.iv_spdef %></div>
+    <div><%= @pokemon.iv_speed %></div>
+</div>
+
+<h2>EVs</h2>
+<div class="evs">
+    <div><p>HP</p></div>
+    <div><p>Att</p></div>
+    <div><p>Def</p></div>
+    <div><p>Sp.Atk</p></div>
+    <div><p>Sp.Def</p></div>
+    <div><p>Spe</p></div>
+    <div><%= @pokemon.ev_hp %></div>
+    <div><%= @pokemon.ev_attack %></div>
+    <div><%= @pokemon.ev_defense %></div>
+    <div><%= @pokemon.ev_spatk %></div>
+    <div><%= @pokemon.ev_spdef %></div>
+    <div><%= @pokemon.ev_speed %></div>
+</div>
+
+<div class="controls">
+    <%= link_to "edit", edit_pokemon_path %>
+    <%= link_to "delete", @pokemon, :method => :delete, :data => {:confirm =>"Are you sure?"} %>
+</div>

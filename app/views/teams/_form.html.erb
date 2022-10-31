@@ -1,0 +1,7 @@
+<%= form_for @team do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+    <%= f.label :pokemon_id %>
+    <%= f.collection_check_boxes :pokemon_ids, Pokemon.all, :id, :name  %>
+    <%= f.submit %>
+<% end %>

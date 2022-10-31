@@ -1,0 +1,45 @@
+<h1>Edit Pokemon</h1>
+
+<%= form_for @pokemon do |f| %>
+    <div class="details">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.label :nature_id %>
+        <%= f.select :nature_id, Nature.pluck(:name, :id) %>
+        <%= f.label :item_id %>
+        <%= f.select :item_id, Item.pluck(:name,:id) %>
+    </div>
+    <div class="ivs">
+        <%= f.label :iv_hp %>
+        <%= f.number_field :iv_hp %>
+        <%= f.label :iv_attack %>
+        <%= f.number_field :iv_attack %>
+        <%= f.label :iv_defense %>
+        <%= f.number_field :iv_defense %>
+        <%= f.label :iv_spatk %>
+        <%= f.number_field :iv_spatk %>
+        <%= f.label :iv_spdef %>
+        <%= f.number_field :iv_spdef %>
+        <%= f.label :iv_speed %>
+        <%= f.number_field :iv_speed %>
+    </div>
+    <div class="evs">
+        <%= f.label :ev_hp %>
+        <%= f.number_field :ev_hp %>
+        <%= f.label :ev_attack %>
+        <%= f.number_field :ev_attack %>
+        <%= f.label :ev_defense %>
+        <%= f.number_field :ev_defense %>
+        <%= f.label :ev_spatk %>
+        <%= f.number_field :ev_spatk %>
+        <%= f.label :ev_spdef %>
+        <%= f.number_field :ev_spdef %>
+        <%= f.label :ev_speed %>
+        <%= f.number_field :ev_speed %>
+    </div>
+    <div class="attacks">
+        <%= f.label :attack_id %>
+        <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all, :id, :name  %>
+    </div>
+    <%= f.submit %>
+<% end %>

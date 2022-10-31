@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :attacks, :only => [:show,:edit,:index]
   resources :pokemon
   resources :users, :only => [:new, :create, :index]
+  resources :teams
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
