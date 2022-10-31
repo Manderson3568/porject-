@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_30_072345) do
+ActiveRecord::Schema.define(version: 2022_10_31_030709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(version: 2022_10_30_072345) do
   create_table "abilities", force: :cascade do |t|
     t.string "name"
     t.text "info"
+  end
+
+  create_table "abilities_pokemons", id: false, force: :cascade do |t|
+    t.integer "ability_id"
+    t.integer "pokemon_id"
   end
 
   create_table "abilities_species", id: false, force: :cascade do |t|
@@ -32,6 +37,11 @@ ActiveRecord::Schema.define(version: 2022_10_30_072345) do
     t.integer "pp"
     t.integer "power"
     t.integer "accuracy"
+  end
+
+  create_table "attacks_pokemons", id: false, force: :cascade do |t|
+    t.integer "attack_id"
+    t.integer "pokemon_id"
   end
 
   create_table "attacks_species", id: false, force: :cascade do |t|
@@ -69,6 +79,12 @@ ActiveRecord::Schema.define(version: 2022_10_30_072345) do
     t.integer "iv_speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "pokemons_teams", force: :cascade do |t|
+    t.integer "pokemon_id"
+    t.integer "team_id"
   end
 
   create_table "species", force: :cascade do |t|
@@ -80,6 +96,20 @@ ActiveRecord::Schema.define(version: 2022_10_30_072345) do
     t.integer "spatk"
     t.integer "spdef"
     t.integer "speed"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "admin", default: false
   end
 
 end

@@ -1,0 +1,6 @@
+<h1>New Pokemon</h1>
+
+<%= form_for :pokemon do |f| %>
+    <%= f.label :species_id %>
+    <%= f.select :species_id, Species.pluck(:name, :id), :include_blank => true %>
+<% end %>
