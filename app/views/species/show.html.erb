@@ -1,0 +1,23 @@
+<h1><%= @species.name %></h1>
+<p><%= @species.element_type %></p>
+<% @species.abilities.each do |ability| %>
+    <p><%= ability.name %> - <%= ability.info %> </p>
+<% end %>
+<p></p>
+<h2>Base stats</h2>
+<p>Hp: <%= @species.hp %></p>
+<p>Attack: <%= @species.attack %></p>
+<p>Defense: <%= @species.defense %></p>
+<p>Sp. Atk: <%= @species.spatk %></p>
+<p>SP Def: <%= @species.spdef %></p>
+<p>Speed: <%= @species.speed %></p>
+
+<h2>Learnable Attacks</h2>
+<ul>
+    <% @species.attacks.each do |attack| %>
+        <li>
+        <%= link_to attack.name, attack %>
+        </li>
+    <% end %>
+</ul>
+

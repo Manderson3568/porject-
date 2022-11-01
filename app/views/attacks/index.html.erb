@@ -1,0 +1,12 @@
+<h1>All Attacks</h1>
+
+<% @attacks.each do |attack| %>
+    <p>
+        <%=link_to attack.name, attack %>
+        <%= attack.element_type %>
+        <%= attack.category %>
+        <%= attack.pp %>
+        <%= attack.power %>
+        <%= attack.accuracy %>
+    </p>
+<% end %>

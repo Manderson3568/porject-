@@ -1,0 +1,12 @@
+<h1><%= @ability.name %></h1>
+
+<p><%= @ability.info %></p>
+
+<h2>Pokemon that use <%= @ability.name %>:</h2>
+<ul>
+<% @ability.species.sort.each do |species| %>
+<li>
+    <%= link_to species.name, species %>
+</li>
+<% end %>
+</ul>

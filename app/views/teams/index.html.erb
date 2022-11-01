@@ -1,0 +1,20 @@
+<h1>All teams</h1>
+
+<% @teams.each do |team| %>
+<p><%= team.name %></p>
+    <% team.pokemon.each do |pokemon| %>
+        <ul>
+        <li><%= pokemon.species.name %></li>
+        <li><%= pokemon.item.name if !pokemon.item.nil? %></li>
+        <li><%= pokemon.nature.name if !pokemon.nature.nil? %></li>
+        </ul>
+        <ul>
+        <% pokemon.attacks.each do |attack| %>
+            <li>
+            <%= attack.name %>
+            <%= attack.element_type %>
+            </li>
+        <% end %>
+        </ul>
+    <% end %>
+<% end %>

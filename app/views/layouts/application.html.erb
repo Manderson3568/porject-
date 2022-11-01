@@ -10,21 +10,32 @@
   </head>
 
   <body>
-      <div class="account_controls">
-          <% if @current_user.present? %>
-        <% if @current_user.admin? %>
-          <%= link_to 'All users', users_path %>
-      <% end %>
-        <%= link_to "Sign out #{ @current_user.email }", login_path, :method => 'delete' %>
-      <% else %>
-        <%= link_to 'Sign up', new_user_path %>
-        <%= link_to 'Sign in', login_path %>
-      <% end %>
-    </div>
     <nav>
-      <%= link_to 'Home', root_path %>
-      <%= link_to "All Pokemon", pokemon_index_path %>
-      <%= link_to "New Pokemon", new_pokemon_path %>
+      <div class="account_controls">
+        <% if @current_user.present? %>
+          <% if @current_user.admin? %>
+            <%= link_to 'All users', users_path %>
+          <% end %>
+          <%= link_to "Sign out #{ @current_user.email }", login_path, :method => 'delete' %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_path %>
+          <%= link_to 'Sign in', login_path %>
+        <% end %>
+      </div>
+      <div class="main_nav">
+        <%= link_to 'Home', root_path %>
+        <%= link_to "All Pokemon", pokemon_index_path %>
+        <%= link_to "New Pokemon", new_pokemon_path %>
+        <%= link_to "All Teams", teams_path %>
+        <%= link_to "New Team", new_team_path %>
+      </div>
+      <div class="index_nav">
+        <%= link_to "Species", species_index_path %>
+        <%= link_to "Abilities", abilities_path %>
+        <%= link_to "Attacks", attacks_path %>
+        <%= link_to "Natures", natures_path %>
+        <%= link_to "Items", items_path %>
+      </div>
     </nav>
     <%= yield %>
   </body>

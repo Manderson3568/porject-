@@ -1,0 +1,7 @@
+<h1>Abilities</h1>
+
+<% @abilities.sort.each do |ability| %>
+    <p>
+        <%= link_to ability.name, ability %> - <%= ability.info %>
+    </p>
+<% end %>

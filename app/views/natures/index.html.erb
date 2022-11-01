@@ -1,0 +1,9 @@
+<h1>Natures</h1>
+
+<% @natures.each do |nature| %>
+    <p>
+    Name: <%= nature.name %>, 
+    Increase: <%= nature.plus %>,
+    Decrease: <%= nature.minus %>
+    </p>
+<% end %>

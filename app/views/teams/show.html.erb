@@ -16,4 +16,9 @@
         <li>Accuracy: <%= att.accuracy %></li>
         </ul>
     <% end %>
+
+    <div class="controls">
+    <%= link_to "Edit", edit_team %>
+    <%= link_to "delete", @team, :method => :delete, :data => {:confirm =>"Are you sure?"} %>
+    </div>
 <% end %>

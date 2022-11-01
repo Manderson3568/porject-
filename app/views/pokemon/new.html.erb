@@ -4,6 +4,6 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
     <%= f.label :species_id %>
-    <%= f.select :species_id, Species.pluck(:name, :id), :include_blank => true %>
+    <%= f.select :species_id, Species.pluck(:name, :id).sort, :include_blank => true %>
     <%= f.submit %>
 <% end %>

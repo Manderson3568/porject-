@@ -39,7 +39,7 @@
     </div>
     <div class="attacks">
         <%= f.label :attack_id %>
-        <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all, :id, :name  %>
+        <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all.sort, :id, :name  %>
     </div>
     <%= f.submit %>
 <% end %>

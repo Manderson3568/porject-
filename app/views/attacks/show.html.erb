@@ -1,0 +1,16 @@
+<h1><%= @attack.name.capitalize %></h1>
+
+<%= @attack.element_type %>
+<%= @attack.category %>
+<%= @attack.pp %>
+<%= @attack.power %>
+<%= @attack.accuracy %>
+
+<h2>Pokemon that can learn <%= @attack.name %></h2>
+
+
+<ul>
+    <% @attack.species.sort.each do |pokemon| %>
+        <li><%= link_to pokemon.name, pokemon %></li>
+    <% end %>
+</ul>  

@@ -1,0 +1,5 @@
+<h1>All Species</h1>
+
+<% @species.each do |species|%>
+    <p><%= link_to species.name, species %></p>
+<% end %>
