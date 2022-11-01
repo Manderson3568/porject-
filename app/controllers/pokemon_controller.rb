@@ -1,4 +1,5 @@
 class PokemonController < ApplicationController
+    before_action :check_for_login
     def show
         @pokemon = Pokemon.find params[:id]
     end
