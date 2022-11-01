@@ -19,10 +19,14 @@ class PokemonController < ApplicationController
     end
 
     def update
-        pokemon = Pokemon.find params[:id]
+        @pokemon = Pokemon.find params[:id]
         # raise "hell"
-        pokemon.update pokemon_params
-        redirect_to pokemon_path pokemon
+        if @pokemon.update pokemon_params
+            redirect_to pokemon_path @pokemon
+        else
+            raise "hell"
+            redirect_to edit_pokemon_path @pokemon
+        end
     end
     def destroy
         @pokemon = Pokemon.find params[:id]

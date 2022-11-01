@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_021600) do
+ActiveRecord::Schema.define(version: 2022_11_01_084611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,18 +66,18 @@ ActiveRecord::Schema.define(version: 2022_10_31_021600) do
     t.integer "species_id"
     t.integer "nature_id"
     t.integer "item_id"
-    t.integer "ev_hp"
-    t.integer "ev_attack"
-    t.integer "ev_defense"
-    t.integer "ev_spatk"
-    t.integer "ev_spdef"
-    t.integer "ev_speed"
-    t.integer "iv_hp"
-    t.integer "iv_attack"
-    t.integer "iv_defense"
-    t.integer "iv_spatk"
-    t.integer "iv_spdef"
-    t.integer "iv_speed"
+    t.integer "ev_hp", default: 0
+    t.integer "ev_attack", default: 0
+    t.integer "ev_defense", default: 0
+    t.integer "ev_spatk", default: 0
+    t.integer "ev_spdef", default: 0
+    t.integer "ev_speed", default: 0
+    t.integer "iv_hp", default: 0
+    t.integer "iv_attack", default: 0
+    t.integer "iv_defense", default: 0
+    t.integer "iv_spatk", default: 0
+    t.integer "iv_spdef", default: 0
+    t.integer "iv_speed", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

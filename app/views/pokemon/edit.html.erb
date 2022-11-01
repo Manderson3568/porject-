@@ -1,5 +1,11 @@
 <h1>Edit Pokemon</h1>
-
+<% if @pokemon.errors.any? %>
+    <ol>
+        <% @pokemon.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ol>
+<% end %>
 <%= form_for @pokemon do |f| %>
     <div class="details">
         <%= f.label :name %>
