@@ -6,9 +6,30 @@
     </ol>
 <% end %>
 <%= form_for @team do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
-    <%= f.label :pokemon_id %>
-    <%= f.collection_check_boxes :pokemon_ids, @current_user.pokemon.all, :id, :name  %>
-    <%= f.submit %>
+<%= f.label :name, :class => "form-label" %>
+<%= f.text_field :name, :class => "form-control" %>
+    <h2>Pokemon</h2>
+    <%= f.collection_check_boxes :pokemon_ids, Pokemon.all, :id, :name do |pokemon| %>
+    <div class="container mt-1 border border-primary rounded">
+    <div class="row bg-primary bg-opacity-50 rounded-top">
+        <div class="col"><%= pokemon.check_box %><%= link_to pokemon.object.name, pokemon.object, :class => "link-dark" %></div>
+            <div class="col <%= pokemon.object.species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= pokemon.object.species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= pokemon.object.species.element_type.split(" ")[1].downcase if !pokemon.object.species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !pokemon.object.species.element_type.split(" ")[1].nil? %> "><span><%= pokemon.object.species.element_type.split(" ")[1] %></span></div>
+    </div>
+    <div class="row bg-primary bg-opacity-10">
+        <div class="col"><%= pokemon.object.species.name %></div>
+        <div class="col"><%= pokemon.object.item.name if !pokemon.object.item.nil? %></div>
+        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.object.attacks[0].nil? %> <%= pokemon.object.attacks[0].element_type.downcase if !pokemon.object.attacks[0].nil? %>"><span><%= pokemon.object.attacks[0].name if !pokemon.object.attacks[0].nil?  %></span></div>
+        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.object.attacks[0].nil? %> <%= pokemon.object.attacks[1].element_type.downcase if !pokemon.object.attacks[1].nil? %>"><span><%= pokemon.object.attacks[1].name if !pokemon.object.attacks[1].nil?%></span></div>
+    </div>
+    <div class="row bg-primary bg-opacity-10 rounded-bottom">
+        <div class="col"><%= pokemon.object.nature.name if !pokemon.object.nature.nil? %></div>
+        <div class="col"><%= pokemon.object.abilities[0].name if !pokemon.object.abilities[0].nil? %></div>
+        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.object.attacks[0].nil? %> <%= pokemon.object.attacks[2].element_type.downcase if !pokemon.object.attacks[2].nil? %>"><span><%= pokemon.object.attacks[2].name if !pokemon.object.attacks[2].nil?  %></span></div>
+        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.object.attacks[0].nil? %> <%= pokemon.object.attacks[3].element_type.downcase if !pokemon.object.attacks[3].nil? %>"><span><%= pokemon.object.attacks[3].name if !pokemon.object.attacks[3].nil?%></span></div>
+    </div>
+    </div>
+    <% end %>
+
+    <%= f.submit "Team", :class => "btn btn-success" %>
 <% end %>

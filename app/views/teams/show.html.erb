@@ -1,23 +1,27 @@
 <h1><%= @team.name %></h1>
 
 <% @team.pokemon.each do |pokemon| %>
-    <h2><%= pokemon.name %></h2>
-    <ul>
-    <li>Species: <%= pokemon.species.name %></li>
-    <li>Types: <%= pokemon.species.element_type %></li>
-    <li>Item: <%= pokemon.item.name if !pokemon.item.nil? %></li>
-    <li>Nature: <%= pokemon.nature.name if !pokemon.nature.nil? %></li>
-    </ul>
-    <% pokemon.attacks.each do |att| %>
-        <ul>
-        <li>Name: <%= att.name %></li>
-        <li>Type: <%= att.element_type %></li>
-        <li>Power: <%= att.power  %></li>
-        <li>Accuracy: <%= att.accuracy %></li>
-        </ul>
-    <% end %>
+    <div class="container mt-1 border border-primary rounded">
+        <div class="row bg-primary bg-opacity-50 rounded-top">
+            <div class="col"><%= link_to pokemon.name, pokemon, :class => "link-dark" %></div>
+                <div class="col <%= pokemon.species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= pokemon.species.element_type.split(" ")[0] %></span></div>
+                <div class="col <%= pokemon.species.element_type.split(" ")[1].downcase if !pokemon.species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !pokemon.species.element_type.split(" ")[1].nil? %> "><span><%= pokemon.species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-primary bg-opacity-10">
+            <div class="col"><%= pokemon.species.name %></div>
+            <div class="col"><%= pokemon.item.name if !pokemon.item.nil? %></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[0].element_type.downcase if !pokemon.attacks[0].nil? %>"><span><%= pokemon.attacks[0].name if !pokemon.attacks[0].nil?  %></span></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[1].element_type.downcase if !pokemon.attacks[1].nil? %>"><span><%= pokemon.attacks[1].name if !pokemon.attacks[1].nil?%></span></div>
+        </div>
+        <div class="row bg-primary bg-opacity-10 rounded-bottom">
+            <div class="col"><%= pokemon.nature.name if !pokemon.nature.nil? %></div>
+            <div class="col"><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[2].element_type.downcase if !pokemon.attacks[2].nil? %>"><span><%= pokemon.attacks[2].name if !pokemon.attacks[2].nil?  %></span></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[3].element_type.downcase if !pokemon.attacks[3].nil? %>"><span><%= pokemon.attacks[3].name if !pokemon.attacks[3].nil?%></span></div>
+        </div>
+    </div>
 <% end %>
-    <div class="controls">
+<div class="controls">
     <%= link_to "Edit", edit_team_path %>
     <%= link_to "delete", @team, :method => :delete, :data => {:confirm =>"Are you sure?"} %>
-    </div>
+</div>

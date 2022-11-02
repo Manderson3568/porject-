@@ -1,20 +1,15 @@
 <h1>All teams</h1>
 
 <% @teams.each do |team| %>
-<p><%= team.name %></p>
+<div class="container d-flex flex-wrap mt-1">
+<div class="col-12 bg-danger bg-opacity-50 border border-danger rounded text-center"><%=  link_to team.name, team, :class =>"link-dark" %></div>
     <% team.pokemon.each do |pokemon| %>
-        <ul>
-        <li><%= pokemon.species.name %></li>
-        <li><%= pokemon.item.name if !pokemon.item.nil? %></li>
-        <li><%= pokemon.nature.name if !pokemon.nature.nil? %></li>
-        </ul>
-        <ul>
-        <% pokemon.attacks.each do |attack| %>
-            <li>
-            <%= attack.name %>
-            <%= attack.element_type %>
-            </li>
-        <% end %>
-        </ul>
+        <div class="col-4 bg-danger bg-opacity-10 border border-danger rounded">
+            <div class="bg-danger bg-opacity-10"><%= pokemon.name %></div>
+            <div class=""><%= pokemon.species.name %></div>
+            <div class=""><%= pokemon.item.name if !pokemon.item.nil? %></div>
+            <div class=""><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+        </div>
     <% end %>
+</div>
 <% end %>
