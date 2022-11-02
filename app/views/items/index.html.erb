@@ -1,7 +1,12 @@
-<h1>All Held Items</h1>
+<h1>Hold Items</h1>
 
 <% @items.each do |item| %>
-    <p>
-    <%= item.name%> - <%= item.info %>
-    </p>
+    <div class="container m-1 border border-warning rounded">
+        <div class="row bg-warning bg-opacity-50">
+            <span class="text-center"><%= item.name%></span>
+        </div>
+        <div class="row bg-warning bg-opacity-10">
+            <span class="text-center"><%= item.info %></span>
+        </div>
+    </div>
 <% end %>

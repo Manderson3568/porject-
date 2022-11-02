@@ -24,8 +24,8 @@ class PokemonController < ApplicationController
         if @pokemon.update pokemon_params
             redirect_to pokemon_path @pokemon
         else
-            raise "hell"
-            redirect_to edit_pokemon_path @pokemon
+            # raise "hell"
+            render :edit
         end
     end
     def destroy

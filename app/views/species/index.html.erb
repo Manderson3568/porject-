@@ -1,5 +1,28 @@
-<h1>All Species</h1>
+<h1>Species</h1>
 
 <% @species.each do |species|%>
-    <p><%= link_to species.name, species %></p>
+    <div class="container m-1 border border-dark rounded">
+        <div class="row bg-dark bg-opacity-50">
+            <div class="col"><%= link_to species.name, species, :class => "link-dark" %></div>
+            <div class="col <%= species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= species.element_type.split(" ")[1].downcase if !species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !species.element_type.split(" ")[1].nil? %> "><span><%= species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-dark bg-opacity-25">
+            <div class="col">HP</div>
+            <div class="col">Att</div>
+            <div class="col">Def</div>
+            <div class="col">Sp.Atk</div>
+            <div class="col">Sp.Def</div>
+            <div class="col">Spe</div>
+        </div>
+        <div class="row bg-dark bg-opacity-10">
+            <div class="col"><%= species.hp %></div>
+            <div class="col"><%= species.attack %></div>
+            <div class="col"><%= species.defense %></div>
+            <div class="col"><%= species.spatk %></div>
+            <div class="col"><%= species.spdef %></div>
+            <div class="col"><%= species.speed %></div>
+        </div>
+    </div>
 <% end %>
+

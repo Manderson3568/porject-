@@ -4,9 +4,14 @@ class TeamsController < ApplicationController
         @team = Team.new
     end
     def create
-        team = Team.create team_params
-        @current_user.teams << team
-        redirect_to team
+        @team = Team.new team_params
+        if @team.save 
+            @current_user.teams << @team
+            redirect_to team_path @team
+        else
+            # raise "hell"
+            render :new
+        end
     end
 
     def show
@@ -21,8 +26,11 @@ class TeamsController < ApplicationController
     end
     def update
         team = Team.find params[:id]
-        team.update team_params
-        redirect_to team
+        if team.update team_params
+            redirect_to team
+        else 
+            render :edit
+        end
     end 
     def destroy
         team = Team.find params[:id]

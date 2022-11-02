@@ -2,50 +2,95 @@
 <% if @pokemon.errors.any? %>
     <ol>
         <% @pokemon.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+            <li class="text-danger"><%= msg %></li>
         <% end %>
     </ol>
 <% end %>
+
 <%= form_for @pokemon do |f| %>
-    <div class="details">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :nature_id %>
-        <%= f.select :nature_id, Nature.pluck(:name, :id) %>
-        <%= f.label :item_id %>
-        <%= f.select :item_id, Item.pluck(:name,:id) %>
+<div class="info">
+        <%= f.label :name, "Team Name", {:class => "form-label"} %>
+        <%= f.text_field :name, :class => "form-control" %>
+        <h2>Stats</h2>
+    <div class="container m-1 border border-dark rounded">
+        <div class="row bg-dark bg-opacity-50">
+            <div class="col"><%= link_to @pokemon.species.name, @pokemon.species, :class => "link-dark" %></div>
+            <div class="col <%= @pokemon.species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= @pokemon.species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= @pokemon.species.element_type.split(" ")[1].downcase if !@pokemon.species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !@pokemon.species.element_type.split(" ")[1].nil? %> "><span><%= @pokemon.species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-dark bg-opacity-25">
+            <div class="col">Stat:</div>
+            <div class="col">HP</div>
+            <div class="col">Att</div>
+            <div class="col">Def</div>
+            <div class="col">Sp.Atk</div>
+            <div class="col">Sp.Def</div>
+            <div class="col">Spe</div>
+        </div>
+        <div class="row bg-primary bg-opacity-25">
+            <div class="col">Base:</div>
+            <div class="col"><%= @pokemon.species.hp %></div>
+            <div class="col"><%= @pokemon.species.attack %></div>
+            <div class="col"><%= @pokemon.species.defense %></div>
+            <div class="col"><%= @pokemon.species.spatk %></div>
+            <div class="col"><%= @pokemon.species.spdef %></div>
+            <div class="col"><%= @pokemon.species.speed %></div>
+        </div>
+        <div class="row bg-success bg-opacity-25">
+            <div class="col">IV:</div>
+            <div class="col"><%= f.number_field :iv_hp, {:class => "form-control"} %></div>
+            <div class="col"><%= f.number_field :iv_attack, {:class => "form-control"} %></div>
+            <div class="col"><%= f.number_field :iv_defense, {:class => "form-control"} %></div>
+            <div class="col"><%= f.number_field :iv_spatk, {:class => "form-control"} %></div>
+            <div class="col"><%= f.number_field :iv_spdef, {:class => "form-control"} %></div>
+            <div class="col"><%= f.number_field :iv_speed, {:class => "form-control"} %></div>
+        </div>
+        <div class="row bg-warning bg-opacity-25">
+            <div class="col">EV:</div>
+            <div class="col"><%= f.number_field :ev_hp, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_attack, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_defense, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_spatk, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_spdef, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_speed, :class => "form-control" %></div>
+        </div>
     </div>
-    <div class="ivs">
-        <%= f.label :iv_hp %>
-        <%= f.number_field :iv_hp %>
-        <%= f.label :iv_attack %>
-        <%= f.number_field :iv_attack %>
-        <%= f.label :iv_defense %>
-        <%= f.number_field :iv_defense %>
-        <%= f.label :iv_spatk %>
-        <%= f.number_field :iv_spatk %>
-        <%= f.label :iv_spdef %>
-        <%= f.number_field :iv_spdef %>
-        <%= f.label :iv_speed %>
-        <%= f.number_field :iv_speed %>
+    <div class="form-text text-center">**IV's can be a maximum of 31. Ev's are a max of 255 per stat and no more than 510 total**</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <%= f.label :ability_ids, :class => "form-label" %>
+            <%= f.select(:ability_ids, @pokemon.species.abilities.pluck(:name, :id),{},{:class => "form-select"} )%>
+        </div>
+        <div class="col">
+            <%= f.label :nature_id, :class => "form-label"  %>
+            <%= f.select( :nature_id, Nature.pluck(:name, :id),{},{:class => "form-select"}) %>
+        </div>
+        <div class="col">
+            <%= f.label :item_id, :class => "form-label"  %>
+            <%= f.select( :item_id, Item.pluck(:name,:id),{},{:class => "form-select"} )%>
+        </div>
     </div>
-    <div class="evs">
-        <%= f.label :ev_hp %>
-        <%= f.number_field :ev_hp %>
-        <%= f.label :ev_attack %>
-        <%= f.number_field :ev_attack %>
-        <%= f.label :ev_defense %>
-        <%= f.number_field :ev_defense %>
-        <%= f.label :ev_spatk %>
-        <%= f.number_field :ev_spatk %>
-        <%= f.label :ev_spdef %>
-        <%= f.number_field :ev_spdef %>
-        <%= f.label :ev_speed %>
-        <%= f.number_field :ev_speed %>
+</div>
+<h2>Attacks</h2>
+
+<div class="form-text text-center ">** Select a maximum of 4 attacks**</div>
+    <div class="attacks form-check d-flex flex-wrap">
+        <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all.sort, :id, :name do |a| %>
+            <div class="container border rounded mt-1 border-secondary col-6">
+        <div class="row  bg-opacity-50 bg-secondary rounded-top">
+            <div class="col"><%= a.check_box %> <%=link_to a.object.name.capitalize, a.object, :class => "link-dark" %></div>
+            <div class="col-3 <%= a.object.element_type.downcase %> type border rounded text-center border-secondary "><%= a.object.element_type %></div>
+            <div class="col-3"><%= a.object.category %></div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary">
+            <div class="col">PP <%= a.object.pp %></div>
+            <div class="col">Pow. <%= a.object.power %></div>
+            <div class="col">Acc. <%= a.object.accuracy %></div>
+        </div>
     </div>
-    <div class="attacks">
-        <%= f.label :attack_id %>
-        <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all.sort, :id, :name  %>
+        <% end %>
     </div>
-    <%= f.submit %>
+<%= f.submit "Edit Pokemon", :class => "btn btn-success" %>
 <% end %>

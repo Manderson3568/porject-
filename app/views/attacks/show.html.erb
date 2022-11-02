@@ -1,16 +1,48 @@
 <h1><%= @attack.name.capitalize %></h1>
 
-<%= @attack.element_type %>
-<%= @attack.category %>
-<%= @attack.pp %>
-<%= @attack.power %>
-<%= @attack.accuracy %>
+    <div class="container border rounded m-1 border-secondary">
+        <div class="row  bg-opacity-50 bg-secondary rounded-top">
+            <div class="col"><%=link_to @attack.name.capitalize, @attack, :class => "link-dark" %></div>
+            <div class="col <%= @attack.element_type.downcase %> type border rounded text-center border-secondary "><%= @attack.element_type %></div>
+            <div class="col"><%= @attack.category %></div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary">
+            <div class="col">PP</div>
+            <div class="col">Power</div>
+            <div class="col">Accuracy</div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary rounded-bottom">
+            <div class="col"><%= @attack.pp %></div>
+            <div class="col"><%= @attack.power %></div>
+            <div class="col"><%= @attack.accuracy %></div>
+        </div>
+    </div>
 
 <h2>Pokemon that can learn <%= @attack.name %></h2>
-
-
-<ul>
-    <% @attack.species.sort.each do |pokemon| %>
-        <li><%= link_to pokemon.name, pokemon %></li>
-    <% end %>
-</ul>  
+<div class="d-flex flex-wrap">
+<% @attack.species.sort.each do |species| %>
+        <div class="container mt-1 border border-dark rounded col-6 ">
+        <div class="row bg-dark bg-opacity-50">
+            <div class="col"><%= link_to species.name, species, :class => "link-dark" %></div>
+            <div class="col <%= species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= species.element_type.split(" ")[1].downcase if !species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !species.element_type.split(" ")[1].nil? %> "><span><%= species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-dark bg-opacity-25">
+            <div class="col text-center">HP</div>
+            <div class="col text-center">Att</div>
+            <div class="col text-center">Def</div>
+            <div class="col text-center">Sp.Atk</div>
+            <div class="col text-center">Sp.Def</div>
+            <div class="col text-center">Spe</div>
+        </div>
+        <div class="row bg-dark bg-opacity-10">
+            <div class="col text-center"><%= species.hp %></div>
+            <div class="col text-center"><%= species.attack %></div>
+            <div class="col text-center"><%= species.defense %></div>
+            <div class="col text-center"><%= species.spatk %></div>
+            <div class="col text-center"><%= species.spdef %></div>
+            <div class="col text-center"><%= species.speed %></div>
+        </div>
+    </div>
+<% end %>
+</div>

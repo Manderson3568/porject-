@@ -1,23 +1,52 @@
 <h1><%= @species.name %></h1>
-<p><%= @species.element_type %></p>
+    <div class="container m-1 border border-dark rounded">
+        <div class="row bg-dark bg-opacity-50">
+            <div class="col"><%= link_to @species.name, @species, :class => "link-dark" %></div>
+            <div class="col <%= @species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= @species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= @species.element_type.split(" ")[1].downcase if !@species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !@species.element_type.split(" ")[1].nil? %> "><span><%= @species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-dark bg-opacity-25">
+            <div class="col">HP</div>
+            <div class="col">Att</div>
+            <div class="col">Def</div>
+            <div class="col">Sp.Atk</div>
+            <div class="col">Sp.Def</div>
+            <div class="col">Spe</div>
+        </div>
+        <div class="row bg-dark bg-opacity-10">
+            <div class="col"><%= @species.hp %></div>
+            <div class="col"><%= @species.attack %></div>
+            <div class="col"><%= @species.defense %></div>
+            <div class="col"><%= @species.spatk %></div>
+            <div class="col"><%= @species.spdef %></div>
+            <div class="col"><%= @species.speed %></div>
+        </div>
+    </div>
+<h2>Abilities</h2>
 <% @species.abilities.each do |ability| %>
-    <p><%= ability.name %> - <%= ability.info %> </p>
+    <div class="container m-1 border border-info rounded ">
+    <div class="row bg-info bg-opacity-50">
+        <span class = "text-center"><%= link_to ability.name, ability, :class => "link-dark" %></span>
+    </div>
+    <div class="row bg-info bg-opacity-10">
+        <span class = "text-center"><%= ability.info %></span>
+    </div>
+    </div>
 <% end %>
-<p></p>
-<h2>Base stats</h2>
-<p>Hp: <%= @species.hp %></p>
-<p>Attack: <%= @species.attack %></p>
-<p>Defense: <%= @species.defense %></p>
-<p>Sp. Atk: <%= @species.spatk %></p>
-<p>SP Def: <%= @species.spdef %></p>
-<p>Speed: <%= @species.speed %></p>
-
 <h2>Learnable Attacks</h2>
-<ul>
+<div class="d-flex flex-wrap">
     <% @species.attacks.each do |attack| %>
-        <li>
-        <%= link_to attack.name, attack %>
-        </li>
+    <div class="container border rounded mt-1 border-secondary col-6">
+        <div class="row  bg-opacity-50 bg-secondary rounded-top">
+            <div class="col"><%=link_to attack.name.capitalize, attack, :class => "link-dark" %></div>
+            <div class="col-3 <%= attack.element_type.downcase %> type border rounded text-center border-secondary "><%= attack.element_type %></div>
+            <div class="col-3"><%= attack.category %></div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary">
+            <div class="col">PP <%= attack.pp %></div>
+            <div class="col">Pow. <%= attack.power %></div>
+            <div class="col">Acc. <%= attack.accuracy %></div>
+        </div>
+    </div>
     <% end %>
-</ul>
-
+</div>

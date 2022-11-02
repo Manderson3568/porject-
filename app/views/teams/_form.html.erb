@@ -1,3 +1,10 @@
+<% if @team.errors.any? %>
+    <ol>
+        <% @team.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ol>
+<% end %>
 <%= form_for @team do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>

@@ -1,12 +1,21 @@
-<h1>All Attacks</h1>
+<h1>Attacks</h1>
 
 <% @attacks.each do |attack| %>
-    <p>
-        <%=link_to attack.name, attack %>
-        <%= attack.element_type %>
-        <%= attack.category %>
-        <%= attack.pp %>
-        <%= attack.power %>
-        <%= attack.accuracy %>
-    </p>
+    <div class="container border rounded m-1 border-secondary">
+        <div class="row  bg-opacity-50 bg-secondary rounded-top">
+            <div class="col"><%=link_to attack.name.capitalize, attack, :class => "link-dark" %></div>
+            <div class="col <%= attack.element_type.downcase %> type border rounded text-center border-secondary "><%= attack.element_type %></div>
+            <div class="col"><%= attack.category %></div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary">
+            <div class="col">PP</div>
+            <div class="col">Power</div>
+            <div class="col">Accuracy</div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary rounded-bottom">
+            <div class="col"><%= attack.pp %></div>
+            <div class="col"><%= attack.power %></div>
+            <div class="col"><%= attack.accuracy %></div>
+        </div>
+    </div>
 <% end %>

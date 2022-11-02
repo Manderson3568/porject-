@@ -1,58 +1,105 @@
 <h1><%= @pokemon.name.capitalize %></h1>
 
 <div class="info">
-    <p>Pokemon: <%= @pokemon.species.name %></p>
-    <p>Nature: <%= @pokemon.nature.name if !@pokemon.nature.nil? %></p>
-    <p>Item: <%= @pokemon.item.name if !@pokemon.item.nil?%></p>
+    <div class="container m-1 border border-dark rounded">
+        <div class="row bg-dark bg-opacity-50">
+            <div class="col"><%= link_to @pokemon.species.name, @pokemon.species, :class => "link-dark" %></div>
+            <div class="col <%= @pokemon.species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= @pokemon.species.element_type.split(" ")[0] %></span></div>
+            <div class="col <%= @pokemon.species.element_type.split(" ")[1].downcase if !@pokemon.species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !@pokemon.species.element_type.split(" ")[1].nil? %> "><span><%= @pokemon.species.element_type.split(" ")[1] %></span></div>
+        </div>
+        <div class="row bg-dark bg-opacity-25">
+            <div class="col">Stat:</div>
+            <div class="col">HP</div>
+            <div class="col">Att</div>
+            <div class="col">Def</div>
+            <div class="col">Sp.Atk</div>
+            <div class="col">Sp.Def</div>
+            <div class="col">Spe</div>
+        </div>
+        <div class="row bg-primary bg-opacity-25">
+            <div class="col">Base:</div>
+            <div class="col"><%= @pokemon.species.hp %></div>
+            <div class="col"><%= @pokemon.species.attack %></div>
+            <div class="col"><%= @pokemon.species.defense %></div>
+            <div class="col"><%= @pokemon.species.spatk %></div>
+            <div class="col"><%= @pokemon.species.spdef %></div>
+            <div class="col"><%= @pokemon.species.speed %></div>
+        </div>
+        <div class="row bg-success bg-opacity-25">
+            <div class="col">IV:</div>
+            <div class="col"><%= @pokemon.iv_hp %></div>
+            <div class="col"><%= @pokemon.iv_attack %></div>
+            <div class="col"><%= @pokemon.iv_defense %></div>
+            <div class="col"><%= @pokemon.iv_spatk %></div>
+            <div class="col"><%= @pokemon.iv_spdef %></div>
+            <div class="col"><%= @pokemon.iv_speed %></div>
+        </div>
+        <div class="row bg-warning bg-opacity-25">
+            <div class="col">EV:</div>
+            <div class="col"><%= @pokemon.ev_hp %></div>
+            <div class="col"><%= @pokemon.ev_attack %></div>
+            <div class="col"><%= @pokemon.ev_defense %></div>
+            <div class="col"><%= @pokemon.ev_spatk %></div>
+            <div class="col"><%= @pokemon.ev_spdef %></div>
+            <div class="col"><%= @pokemon.ev_speed %></div>
+        </div>
+    </div>
 </div>
 
-<h2>Attacks</h2>
-<div class="attacks">
-    <% @pokemon.attacks.each do |attack| %>
-        <div class="attack">
-            <p>
-                <%= attack.name %>
-                <%= attack.element_type %>
-                <%= attack.category %>
-                <%= attack.pp %>
-                <%= attack.power %>
-                <%= attack.accuracy %>
-            </p>
+<% if !@pokemon.abilities[0].nil?%>
+    <div class="container m-1 border border-info rounded ">
+        <div class="row bg-info bg-opacity-50">
+            <span class = "text-center"><%= link_to @pokemon.abilities[0].name, @pokemon.abilities[0], :class => "link-dark" %></span>
         </div>
+        <div class="row bg-info bg-opacity-10">
+            <span class = "text-center"><%= @pokemon.abilities[0].info %></span>
+        </div>
+    </div>
+<% end %>
+
+<% if !@pokemon.nature.nil? %>
+    <div class="container border border-success m-1 rounded">
+    <div class="row bg-success bg-opacity-50">
+    <span class="text-center"><%= @pokemon.nature.name %></span>
+    </div>
+        <div class="row bg-success bg-opacity-10">
+            <div class="col">Increase: <%= @pokemon.nature.plus %></div>
+            <div class="col">Decrease: <%= @pokemon.nature.minus %></div>
+        </div>
+    </div>
+<% end %>
+
+<% if !@pokemon.item.nil? %>
+    <div class="container m-1 border border-warning rounded">
+        <div class="row bg-warning bg-opacity-50">
+            <span class="text-center"><%= @pokemon.item.name %></span>
+        </div>
+        <div class="row bg-warning bg-opacity-10">
+            <span class="text-center"><%= @pokemon.item.info %></span>
+        </div>
+    </div>
+<% end %>
+
+
+<h2>Attacks</h2>
+<div class="d-flex flex-wrap">
+    <% @pokemon.attacks.each do |attack| %>
+    <div class="container border rounded mt-1 border-secondary col-6">
+        <div class="row  bg-opacity-50 bg-secondary rounded-top">
+            <div class="col"><%=link_to attack.name.capitalize, attack, :class => "link-dark" %></div>
+            <div class="col-3 <%= attack.element_type.downcase %> type border rounded text-center border-secondary "><%= attack.element_type %></div>
+            <div class="col-3"><%= attack.category %></div>
+        </div>
+        <div class="row bg-opacity-10 bg-secondary">
+            <div class="col">PP <%= attack.pp %></div>
+            <div class="col">Pow. <%= attack.power %></div>
+            <div class="col">Acc. <%= attack.accuracy %></div>
+        </div>
+    </div>
     <% end %>
 </div>
 
-<h2>IVs</h2>
-<div class="ivs">
-    <div><p>HP</p></div>
-    <div><p>Att</p></div>
-    <div><p>Def</p></div>
-    <div><p>Sp.Atk</p></div>
-    <div><p>Sp.Def</p></div>
-    <div><p>Spe</p></div>
-    <div><%= @pokemon.iv_hp %></div>
-    <div><%= @pokemon.iv_attack %></div>
-    <div><%= @pokemon.iv_defense %></div>
-    <div><%= @pokemon.iv_spatk %></div>
-    <div><%= @pokemon.iv_spdef %></div>
-    <div><%= @pokemon.iv_speed %></div>
-</div>
 
-<h2>EVs</h2>
-<div class="evs">
-    <div><p>HP</p></div>
-    <div><p>Att</p></div>
-    <div><p>Def</p></div>
-    <div><p>Sp.Atk</p></div>
-    <div><p>Sp.Def</p></div>
-    <div><p>Spe</p></div>
-    <div><%= @pokemon.ev_hp %></div>
-    <div><%= @pokemon.ev_attack %></div>
-    <div><%= @pokemon.ev_defense %></div>
-    <div><%= @pokemon.ev_spatk %></div>
-    <div><%= @pokemon.ev_spdef %></div>
-    <div><%= @pokemon.ev_speed %></div>
-</div>
 
 <div class="controls">
     <%= link_to "edit", edit_pokemon_path %>

@@ -1,9 +1,13 @@
 <h1>Natures</h1>
 
 <% @natures.each do |nature| %>
-    <p>
-    Name: <%= nature.name %>, 
-    Increase: <%= nature.plus %>,
-    Decrease: <%= nature.minus %>
-    </p>
+    <div class="container border border-success m-1 rounded">
+    <div class="row bg-success bg-opacity-50">
+    <span class="text-center"><%= nature.name %></span>
+    </div>
+        <div class="row bg-success bg-opacity-10">
+            <div class="col">Increase: <%= nature.plus %></div>
+            <div class="col">Decrease: <%= nature.minus %></div>
+        </div>
+    </div>
 <% end %>

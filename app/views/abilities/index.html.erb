@@ -1,7 +1,12 @@
 <h1>Abilities</h1>
 
 <% @abilities.sort.each do |ability| %>
-    <p>
-        <%= link_to ability.name, ability %> - <%= ability.info %>
-    </p>
+    <div class="container m-1 border border-info rounded ">
+    <div class="row bg-info bg-opacity-50">
+        <span class = "text-center"><%= link_to ability.name, ability, :class => "link-dark" %></span>
+    </div>
+    <div class="row bg-info bg-opacity-10">
+        <span class = "text-center"><%= ability.info %></span>
+    </div>
+    </div>
 <% end %>
