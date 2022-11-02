@@ -20,8 +20,10 @@ class Pokemon < ApplicationRecord
     validate :ev_total, :max_4_attacks
     private
     def ev_total
-        if (ev_attack + ev_defense + ev_hp + ev_spatk + ev_spdef+ ev_speed) >510
-            errors.add(:ev_attack, "total EV's can't be greater than 510")
+        if !ev_attack.nil? && !ev_defense.nil? && !ev_hp.nil? && !ev_spatk.nil? && !ev_spdef.nil? && !ev_speed.nil?
+            if (ev_attack + ev_defense + ev_hp + ev_spatk + ev_spdef+ ev_speed) >510
+                errors.add(:ev_attack, "total EV's can't be greater than 510")
+            end
         end
     end
 
