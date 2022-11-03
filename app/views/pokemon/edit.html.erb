@@ -29,30 +29,39 @@
         </div>
         <div class="row bg-primary bg-opacity-25">
             <div class="col">Base:</div>
-            <div class="col"><%= @pokemon.species.hp %></div>
-            <div class="col"><%= @pokemon.species.attack %></div>
-            <div class="col"><%= @pokemon.species.defense %></div>
-            <div class="col"><%= @pokemon.species.spatk %></div>
-            <div class="col"><%= @pokemon.species.spdef %></div>
-            <div class="col"><%= @pokemon.species.speed %></div>
+            <div class="col" id="hp"><%= @pokemon.species.hp %></div>
+            <div class="col" id="att"><%= @pokemon.species.attack %></div>
+            <div class="col" id="def"><%= @pokemon.species.defense %></div>
+            <div class="col" id="spatk"><%= @pokemon.species.spatk %></div>
+            <div class="col" id="spdef"><%= @pokemon.species.spdef %></div>
+            <div class="col" id="spe"><%= @pokemon.species.speed %></div>
         </div>
         <div class="row bg-success bg-opacity-25">
             <div class="col">IV:</div>
-            <div class="col"><%= f.number_field :iv_hp, {:class => "form-control"} %></div>
-            <div class="col"><%= f.number_field :iv_attack, {:class => "form-control"} %></div>
-            <div class="col"><%= f.number_field :iv_defense, {:class => "form-control"} %></div>
-            <div class="col"><%= f.number_field :iv_spatk, {:class => "form-control"} %></div>
-            <div class="col"><%= f.number_field :iv_spdef, {:class => "form-control"} %></div>
-            <div class="col"><%= f.number_field :iv_speed, {:class => "form-control"} %></div>
+            <div class="col" ><%= f.number_field :iv_hp, {:class => "form-control stat ", :id=> "ivHp"} %></div>
+            <div class="col" ><%= f.number_field :iv_attack, {:class => "form-control stat", :id => "ivAtt"} %></div>
+            <div class="col" ><%= f.number_field :iv_defense, {:class => "form-control stat", :id => "ivDef"} %></div>
+            <div class="col" ><%= f.number_field :iv_spatk, {:class => "form-control stat", :id => "ivSpatk"} %></div>
+            <div class="col" ><%= f.number_field :iv_spdef, {:class => "form-control stat", :id => "ivSpdef"} %></div>
+            <div class="col" ><%= f.number_field :iv_speed, {:class => "form-control stat", :id => "ivSpe"} %></div>
         </div>
         <div class="row bg-warning bg-opacity-25">
             <div class="col">EV:</div>
-            <div class="col"><%= f.number_field :ev_hp, :class => "form-control" %></div>
-            <div class="col"><%= f.number_field :ev_attack, :class => "form-control" %></div>
-            <div class="col"><%= f.number_field :ev_defense, :class => "form-control" %></div>
-            <div class="col"><%= f.number_field :ev_spatk, :class => "form-control" %></div>
-            <div class="col"><%= f.number_field :ev_spdef, :class => "form-control" %></div>
-            <div class="col"><%= f.number_field :ev_speed, :class => "form-control" %></div>
+            <div class="col"><%= f.number_field :ev_hp, {:class => "form-control stat", :id => "evHp"} %></div>
+            <div class="col" ><%= f.number_field :ev_attack, {:class => "form-control stat", :id =>"evAtt"} %></div>
+            <div class="col" ><%= f.number_field :ev_defense, {:class => "form-control stat", :id =>"evDef"} %></div>
+            <div class="col" ><%= f.number_field :ev_spatk, {:class => "form-control stat", :id =>"evSpatk"} %></div>
+            <div class="col" ><%= f.number_field :ev_spdef, {:class => "form-control stat", :id =>"evSpdef"} %></div>
+            <div class="col" ><%= f.number_field :ev_speed, {:class => "form-control stat", :id =>"evSpe"} %></div>
+        </div>
+        <div class="row bg-danger bg-opacity-25">
+            <div class="col">Total:</div>
+            <div class="col" id="totalHp">0</div>
+            <div class="col" id="totalAtt">0</div>
+            <div class="col" id="totalDef">0</div>
+            <div class="col" id="totalSpatk">0</div>
+            <div class="col" id="totalSpdef">0</div>
+            <div class="col" id="totalSpe">0</div>
         </div>
     </div>
     <div class="form-text text-center">**IV's can be a maximum of 31. Ev's are a maximum of 255 per stat and no more than 510 total**</div>
@@ -69,7 +78,7 @@
         </div>
         <div class="col">
             <%= f.label :item_id, :class => "form-label"  %>
-            <%= f.select( :item_id, Item.pluck(:name,:id),{},{:class => "form-select"} )%>
+            <%= f.select( :item_id, Item.pluck(:name,:id),{},{:class => "form-select", :include_blank => true} )%>
         </div>
     </div>
 </div>
