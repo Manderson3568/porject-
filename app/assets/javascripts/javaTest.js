@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
     
     const getStats = function(){
@@ -12,10 +10,6 @@ $(document).ready(function(){
         stats.spe = [parseInt($("#spe").html()),parseInt($("#ivSpe").val()), parseInt($("#evSpe").val()) ]
         outputStats(stats)
     }
-    $("[type='checkbox']").on('click', function(){
-        updateCount()
-        updatePokemonCount();
-    })
 
     const updateCount = function(){
         let count =  $(':checked').length-3;
@@ -25,6 +19,7 @@ $(document).ready(function(){
             $("#check-count").addClass("red")
         }
     }
+
     const updatePokemonCount = function(){
         let count =  $(':checked').length;
         $("#pokemon-count").html(count)
@@ -33,6 +28,7 @@ $(document).ready(function(){
             $("#pokemon-count").addClass("red")
         }
     }
+    
     const calcHp = function(stat){
         return (Math.floor(0.01 * (2 * stat[0] + stat[1] + Math.floor(0.25 * stat[2])) * 50) + 50 + 10);
     };
@@ -56,12 +52,18 @@ $(document).ready(function(){
             $("#totalSpdef").html(spdef);
             $("#totalSpe").html(spe);
     };
-    
+    // live text update listener
     $(".stat").each(function(i,stat){
             $(stat).on("change", function(){
                 getStats()
             });
     });
+    // attack/pokemon count event listener
+    $("[type='checkbox']").on('click', function(){
+        updateCount()
+        updatePokemonCount();
+    });
+    // initialising current stats on page launch
     getStats();
     updateCount();
     updatePokemonCount();

@@ -2,70 +2,54 @@
 
 <h2><%= link_to "Pokemon Builder", new_pokemon_path, :class =>"link-dark" %></h1>
 <p>The pokemon builder is a tool to allow you to explore stat combinations and their competative outcome. You can also choose abilities, attacks and itesm to track your ideal setup for pokemon</p>
+<!-- Pokemon slider-->
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
   <% @pokemon.each.with_index do |pokemon,i|%>
     <div class="carousel-item <%= p 'active' if i==0%>">
       <div class="container mt-1 border border-primary rounded">
-    <div class="row bg-primary bg-opacity-50 rounded-top">
-        <div class="col"><%= link_to pokemon.name, pokemon, :class => "link-dark" %></div>
+        <div class="row bg-primary bg-opacity-50 rounded-top">
+          <div class="col"><%= link_to pokemon.name, pokemon, :class => "link-dark" %></div>
             <div class="col <%= pokemon.species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= pokemon.species.element_type.split(" ")[0] %></span></div>
             <div class="col <%= pokemon.species.element_type.split(" ")[1].downcase if !pokemon.species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !pokemon.species.element_type.split(" ")[1].nil? %> "><span><%= pokemon.species.element_type.split(" ")[1] %></span></div>
-    </div>
-    <div class="row bg-primary bg-opacity-10">
-        <div class="col"><%= pokemon.species.name %></div>
-        <div class="col"><%= pokemon.item.name if !pokemon.item.nil? %></div>
-        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[0].element_type.downcase if !pokemon.attacks[0].nil? %>"><span><%= pokemon.attacks[0].name if !pokemon.attacks[0].nil?  %></span></div>
-        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[1].element_type.downcase if !pokemon.attacks[1].nil? %>"><span><%= pokemon.attacks[1].name if !pokemon.attacks[1].nil?%></span></div>
-    </div>
-    <div class="row bg-primary bg-opacity-10 rounded-bottom">
-        <div class="col"><%= pokemon.nature.name if !pokemon.nature.nil? %></div>
-        <div class="col"><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
-        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[2].element_type.downcase if !pokemon.attacks[2].nil? %>"><span><%= pokemon.attacks[2].name if !pokemon.attacks[2].nil?  %></span></div>
-        <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[3].element_type.downcase if !pokemon.attacks[3].nil? %>"><span><%= pokemon.attacks[3].name if !pokemon.attacks[3].nil?%></span></div>
-    </div>
-</div>
-    </div>
-<% end %>
+          </div>
+          <div class="row bg-primary bg-opacity-10">
+            <div class="col"><%= pokemon.species.name %></div>
+            <div class="col"><%= pokemon.item.name if !pokemon.item.nil? %></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[0].element_type.downcase if !pokemon.attacks[0].nil? %>"><span><%= pokemon.attacks[0].name if !pokemon.attacks[0].nil?  %></span></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[1].element_type.downcase if !pokemon.attacks[1].nil? %>"><span><%= pokemon.attacks[1].name if !pokemon.attacks[1].nil?%></span></div>
+          </div>
+          <div class="row bg-primary bg-opacity-10 rounded-bottom">
+            <div class="col"><%= pokemon.nature.name if !pokemon.nature.nil? %></div>
+            <div class="col"><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[2].element_type.downcase if !pokemon.attacks[2].nil? %>"><span><%= pokemon.attacks[2].name if !pokemon.attacks[2].nil?  %></span></div>
+            <div class="col <%= p " border border-dark rounded text-center" if !pokemon.attacks[0].nil? %> <%= pokemon.attacks[3].element_type.downcase if !pokemon.attacks[3].nil? %>"><span><%= pokemon.attacks[3].name if !pokemon.attacks[3].nil?%></span></div>
+          </div>
+        </div>
+      </div>
+  <% end %>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
 
 <h2><%= link_to "Team Builder", new_team_path, :class => "link-dark"  %></h2>
 <p>Plan out your team combinations using the pokemon you have created. </p>
-
+<!-- teams slider -->
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-  <% @teams.each.with_index do |team, i| %>
-    <div class="carousel-item <%=p 'active' if i == 0 %>">
-      <div class="container d-flex flex-wrap mt-1">
-<div class="col-12 bg-danger bg-opacity-50 border border-danger rounded text-center"><%=  link_to team.name, team, :class =>"link-dark" %></div>
-    <% team.pokemon.each do |pokemon| %>
-        <div class="col-4 bg-danger bg-opacity-10 border border-danger rounded">
-            <div class="bg-danger bg-opacity-10"><%= pokemon.name %></div>
-            <div class=""><%= pokemon.species.name %></div>
-            <div class=""><%= pokemon.item.name if !pokemon.item.nil? %></div>
-            <div class=""><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+    <% @teams.each.with_index do |team, i| %>
+      <div class="carousel-item <%=p 'active' if i == 0 %>">
+        <div class="container d-flex flex-wrap mt-1">
+          <div class="col-12 bg-danger bg-opacity-50 border border-danger rounded text-center"><%=  link_to team.name, team, :class =>"link-dark" %></div>
+          <% team.pokemon.each do |pokemon| %>
+            <div class="col-4 bg-danger bg-opacity-10 border border-danger rounded">
+              <div class="bg-danger bg-opacity-10"><%= pokemon.name %></div>
+              <div class=""><%= pokemon.species.name %></div>
+              <div class=""><%= pokemon.item.name if !pokemon.item.nil? %></div>
+              <div class=""><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+            </div>
+          <% end %>
         </div>
-    <% end %>
-</div>
-<% end%>
+      <% end%>
     </div>
-
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>

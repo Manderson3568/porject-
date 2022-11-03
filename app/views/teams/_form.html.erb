@@ -10,7 +10,7 @@
 <%= f.text_field :name, :class => "form-control" %>
     <h2>Pokemon</h2>
     <p><span id="pokemon-count">0</span> Pokemon selected</p>
-    <div class="form-text text-center">**Selevt a maximum of 6 pokemon for your team**</div>
+    <div class="form-text text-center">**Select a maximum of 6 pokemon for your team**</div>
     <div id="pokemon-box" class="overflow-auto">
         <%= f.collection_check_boxes :pokemon_ids, Pokemon.all, :id, :name do |pokemon| %>
         <div class="container mt-1 border border-primary rounded">

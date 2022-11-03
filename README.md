@@ -1,24 +1,14 @@
-# README
+# Pokemon Team Builder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This pokemon builder is designed to allow competative players to plan out their pokemon and teams. It's features allow for real time stat displays to maximise customization. 
 
-Things you may want to cover:
+## Architecture and models
 
-* Ruby version
+- Ruby on Rails
+- Jquery (library)
+- Bootstrap (css framework)
 
-* System dependencies
+### seed data
+- PokemonAPI2.0 (gem)
+- Roo (gem)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

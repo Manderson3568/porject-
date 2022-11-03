@@ -20,6 +20,7 @@ class Pokemon < ApplicationRecord
     validates :iv_speed, numericality: {less_than_or_equal_to: 31}
     validate :ev_total, :max_4_attacks
     private
+    # validates total of 510 for EVs
     def ev_total
         if !ev_attack.nil? && !ev_defense.nil? && !ev_hp.nil? && !ev_spatk.nil? && !ev_spdef.nil? && !ev_speed.nil?
             if (ev_attack + ev_defense + ev_hp + ev_spatk + ev_spdef+ ev_speed) >510
@@ -27,7 +28,7 @@ class Pokemon < ApplicationRecord
             end
         end
     end
-
+    # validates max of 4 attacks    
     def max_4_attacks
         if attack_ids.count > 4
             errors.add(:attack_ids, "you can only have 4 attacks")

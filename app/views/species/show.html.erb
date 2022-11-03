@@ -1,4 +1,5 @@
 <h1><%= @species.name %></h1>
+<!-- species details -->
     <div class="container m-1 border border-dark rounded">
         <div class="row bg-dark bg-opacity-50">
             <div class="col"><%= link_to @species.name, @species, :class => "link-dark" %></div>
@@ -23,6 +24,7 @@
         </div>
     </div>
 <h2>Abilities</h2>
+<!-- loop for possible abilities -->
 <% @species.abilities.each do |ability| %>
     <div class="container m-1 border border-info rounded ">
     <div class="row bg-info bg-opacity-50">
@@ -34,6 +36,7 @@
     </div>
 <% end %>
 <h2>Learnable Attacks</h2>
+<!-- loop for learnable attacks flexbox -->
 <div class="d-flex flex-wrap">
     <% @species.attacks.each do |attack| %>
     <div class="container border rounded mt-1 border-secondary col-6">

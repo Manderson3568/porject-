@@ -1,38 +1,39 @@
-    <div class="container m-1 border border-info rounded ">
+<!-- ability display -->
+<div class="container m-1 border border-info rounded ">
     <div class="row bg-info bg-opacity-50">
         <h1 class = "text-center"><%= link_to @ability.name, @ability, :class => "link-dark" %></h1>
     </div>
     <div class="row bg-info bg-opacity-10">
         <span class = "text-center"><%= @ability.info %></span>
     </div>
-    </div>
-
+</div>
+<!-- pokemon display loop -->
 <h2>Pokemon that have <%= @ability.name %></h2>
-<div class="d-flex flex-wrap">
-<% @ability.species.sort.each do |species| %>
+<div class="d-flex flex-wrap"> <!-- flex wrap to keep 2 collumns -->
+    <% @ability.species.sort.each do |species| %>
         <div class="container mt-1 border border-dark rounded col-6 ">
-        <div class="row bg-dark bg-opacity-50">
-            <div class="col"><%= link_to species.name, species, :class => "link-dark" %></div>
-            <div class="col <%= species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= species.element_type.split(" ")[0] %></span></div>
-            <div class="col <%= species.element_type.split(" ")[1].downcase if !species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !species.element_type.split(" ")[1].nil? %> "><span><%= species.element_type.split(" ")[1] %></span></div>
+            <div class="row bg-dark bg-opacity-50">
+                <div class="col"><%= link_to species.name, species, :class => "link-dark" %></div>
+                <div class="col <%= species.element_type.split(" ")[0].downcase %> type border border-dark rounded text-center"><span><%= species.element_type.split(" ")[0] %></span></div><!-- element_type stored as a string with multiple types -->
+                <div class="col <%= species.element_type.split(" ")[1].downcase if !species.element_type.split(" ")[1].nil? %> <%= p "type border border-dark rounded text-center" if !species.element_type.split(" ")[1].nil? %> "><span><%= species.element_type.split(" ")[1] %></span></div><!-- element_type stored as a string with multiple types -->
+            </div>
+            <div class="row bg-dark bg-opacity-25">
+                <div class="col text-center">HP</div>
+                <div class="col text-center">Att</div>
+                <div class="col text-center">Def</div>
+                <div class="col text-center">Sp.Atk</div>
+                <div class="col text-center">Sp.Def</div>
+                <div class="col text-center">Spe</div>
+            </div>
+            <div class="row bg-dark bg-opacity-10">
+                <div class="col text-center"><%= species.hp %></div>
+                <div class="col text-center"><%= species.attack %></div>
+                <div class="col text-center"><%= species.defense %></div>
+                <div class="col text-center"><%= species.spatk %></div>
+                <div class="col text-center"><%= species.spdef %></div>
+                <div class="col text-center"><%= species.speed %></div>
+            </div>
         </div>
-        <div class="row bg-dark bg-opacity-25">
-            <div class="col text-center">HP</div>
-            <div class="col text-center">Att</div>
-            <div class="col text-center">Def</div>
-            <div class="col text-center">Sp.Atk</div>
-            <div class="col text-center">Sp.Def</div>
-            <div class="col text-center">Spe</div>
-        </div>
-        <div class="row bg-dark bg-opacity-10">
-            <div class="col text-center"><%= species.hp %></div>
-            <div class="col text-center"><%= species.attack %></div>
-            <div class="col text-center"><%= species.defense %></div>
-            <div class="col text-center"><%= species.spatk %></div>
-            <div class="col text-center"><%= species.spdef %></div>
-            <div class="col text-center"><%= species.speed %></div>
-        </div>
-    </div>
-<% end %>
+    <% end %>
 </div>
 

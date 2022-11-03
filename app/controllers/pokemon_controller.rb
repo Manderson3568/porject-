@@ -20,11 +20,9 @@ class PokemonController < ApplicationController
 
     def update
         @pokemon = Pokemon.find params[:id]
-        # raise "hell"
         if @pokemon.update pokemon_params
             redirect_to pokemon_path @pokemon
         else
-            # raise "hell"
             render :edit
         end
     end

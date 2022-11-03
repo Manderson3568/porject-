@@ -1,15 +1,16 @@
 <h1>All teams</h1>
-
+<!-- teams display loop -->
 <% @teams.each do |team| %>
-<div class="container d-flex flex-wrap mt-1">
-<div class="col-12 bg-danger bg-opacity-50 border border-danger rounded text-center"><%=  link_to team.name, team, :class =>"link-dark" %></div>
-    <% team.pokemon.each do |pokemon| %>
-        <div class="col-4 bg-danger bg-opacity-10 border border-danger rounded">
-            <div class="bg-danger bg-opacity-10"><%= pokemon.name %></div>
-            <div class=""><%= pokemon.species.name %></div>
-            <div class=""><%= pokemon.item.name if !pokemon.item.nil? %></div>
-            <div class=""><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
-        </div>
-    <% end %>
-</div>
+    <div class="container d-flex flex-wrap mt-1">
+        <div class="col-12 bg-danger bg-opacity-50 border border-danger rounded text-center"><%=  link_to team.name, team, :class =>"link-dark" %></div>
+        <!-- pokemon display loop -->
+        <% team.pokemon.each do |pokemon| %>
+            <div class="col-4 bg-danger bg-opacity-10 border border-danger rounded">
+                <div class="bg-danger bg-opacity-10"><%= pokemon.name %></div>
+                <div class=""><%= pokemon.species.name %></div>
+                <div class=""><%= pokemon.item.name if !pokemon.item.nil? %></div>
+                <div class=""><%= pokemon.abilities[0].name if !pokemon.abilities[0].nil? %></div>
+            </div>
+        <% end %>
+    </div>
 <% end %>

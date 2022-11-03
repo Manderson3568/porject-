@@ -13,11 +13,9 @@ class TeamsController < ApplicationController
             render :new
         end
     end
-
     def show
         @team = Team.find params[:id]
     end
-
     def index
         @teams = Team.all
     end
@@ -37,7 +35,6 @@ class TeamsController < ApplicationController
         team.destroy
         redirect_to teams_path
     end
-
     private
     def team_params
         params.require(:team).permit(:name, :pokemon_ids=>[])

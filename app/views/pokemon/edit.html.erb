@@ -1,4 +1,5 @@
 <h1>Edit Pokemon</h1>
+<!-- validation messages -->
 <% if @pokemon.errors.any? %>
     <ol>
         <% @pokemon.errors.full_messages.each do |msg| %>
@@ -8,6 +9,7 @@
 <% end %>
 
 <%= form_for @pokemon do |f| %>
+<!-- stat display and inputs -->
 <div class="info">
         <%= f.label :name, "Team Name", {:class => "form-label"} %>
         <%= f.text_field :name, :class => "form-control" %>
@@ -28,7 +30,7 @@
             <div class="col">Spe</div>
         </div>
         <div class="row bg-primary bg-opacity-25">
-            <div class="col">Base:</div>
+            <div class="col">Base:</div> <!-- displayed for JS to do live calculations -->
             <div class="col" id="hp"><%= @pokemon.species.hp %></div>
             <div class="col" id="att"><%= @pokemon.species.attack %></div>
             <div class="col" id="def"><%= @pokemon.species.defense %></div>
@@ -37,7 +39,7 @@
             <div class="col" id="spe"><%= @pokemon.species.speed %></div>
         </div>
         <div class="row bg-success bg-opacity-25">
-            <div class="col">IV:</div>
+            <div class="col">IV:</div> 
             <div class="col" ><%= f.number_field :iv_hp, {:class => "form-control stat ", :id=> "ivHp"} %></div>
             <div class="col" ><%= f.number_field :iv_attack, {:class => "form-control stat", :id => "ivAtt"} %></div>
             <div class="col" ><%= f.number_field :iv_defense, {:class => "form-control stat", :id => "ivDef"} %></div>
@@ -55,7 +57,7 @@
             <div class="col" ><%= f.number_field :ev_speed, {:class => "form-control stat", :id =>"evSpe"} %></div>
         </div>
         <div class="row bg-danger bg-opacity-25">
-            <div class="col">Total:</div>
+            <div class="col">Total:</div> <!-- js to update these figures -->
             <div class="col" id="totalHp">0</div>
             <div class="col" id="totalAtt">0</div>
             <div class="col" id="totalDef">0</div>
@@ -66,13 +68,14 @@
     </div>
     <div class="form-text text-center">**IV's can be a maximum of 31. Ev's are a maximum of 255 per stat and no more than 510 total**</div>
 </div>
+<!-- select menus -->
 <div class="container">
     <div class="row">
         <div class="col">
             <%= f.label :ability_ids, :class => "form-label" %>
             <%= f.select(:ability_ids, @pokemon.species.abilities.pluck(:name, :id),{},{:class => "form-select"} )%>
         </div>
-        <div class="col">
+        <div class="col"> <!-- should also effect the above stats, js never implemented -->
             <%= f.label :nature_id, :class => "form-label"  %>
             <%= f.select( :nature_id, Nature.pluck(:name, :id),{},{:class => "form-select"}) %>
         </div>
@@ -83,24 +86,24 @@
     </div>
 </div>
 <h2>Attacks</h2>
-<p><span id="check-count">0</span> attacks selected</p>
+<!-- checkbox loop to display attacks -->
+<p><span id="check-count">0</span> attacks selected</p><!-- js to update count -->
 <div class="form-text text-center ">** Select a maximum of 4 attacks**</div>
     <div class="attacks form-check d-flex flex-wrap overflow-auto" id="attack-box">
         <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all.sort, :id, :name do |a| %>
             <div class="container border rounded mt-1 border-secondary col-6">
-        <div class="row  bg-opacity-50 bg-secondary rounded-top">
-            <div class="col"><%= a.check_box %> <%=link_to a.object.name.capitalize, a.object, :class => "link-dark" %></div>
-            <div class="col-3 <%= a.object.element_type.downcase %> type border rounded text-center border-secondary "><%= a.object.element_type %></div>
-            <div class="col-3"><%= a.object.category %></div>
-        </div>
-        <div class="row bg-opacity-10 bg-secondary">
-            <div class="col">PP <%= a.object.pp %></div>
-            <div class="col">Pow. <%= a.object.power %></div>
-            <div class="col">Acc. <%= a.object.accuracy %></div>
-        </div>
-    </div>
+                <div class="row  bg-opacity-50 bg-secondary rounded-top">
+                    <div class="col"><%= a.check_box %> <%=link_to a.object.name.capitalize, a.object, :class => "link-dark" %></div>
+                    <div class="col-3 <%= a.object.element_type.downcase %> type border rounded text-center border-secondary "><%= a.object.element_type %></div>
+                    <div class="col-3"><%= a.object.category %></div>
+                </div>
+                <div class="row bg-opacity-10 bg-secondary">
+                    <div class="col">PP <%= a.object.pp %></div>
+                    <div class="col">Pow. <%= a.object.power %></div>
+                    <div class="col">Acc. <%= a.object.accuracy %></div>
+                </div>
+            </div>
         <% end %>
-    </div>
-    
-<%= f.submit "Edit Pokemon", :class => "btn btn-success" %>
+    </div>      
+    <%= f.submit "Edit Pokemon", :class => "btn btn-success" %>
 <% end %>
