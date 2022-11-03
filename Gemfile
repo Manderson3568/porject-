@@ -29,7 +29,6 @@ gem "roo", "~> 2.9.0"
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'sprockets-rails'
-gem "gon"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
