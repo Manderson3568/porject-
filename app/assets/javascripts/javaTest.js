@@ -12,11 +12,32 @@ $(document).ready(function(){
         stats.spe = [parseInt($("#spe").html()),parseInt($("#ivSpe").val()), parseInt($("#evSpe").val()) ]
         outputStats(stats)
     }
-    calcHp = function(stat){
+    $("[type='checkbox']").on('click', function(){
+        updateCount()
+        updatePokemonCount();
+    })
+
+    const updateCount = function(){
+        let count =  $(':checked').length-3;
+        $("#check-count").html(count)
+        $("#check-count").removeClass("red")
+        if (count>4){
+            $("#check-count").addClass("red")
+        }
+    }
+    const updatePokemonCount = function(){
+        let count =  $(':checked').length;
+        $("#pokemon-count").html(count)
+        $("#pokemon-count").removeClass("red")
+        if (count>6){
+            $("#pokemon-count").addClass("red")
+        }
+    }
+    const calcHp = function(stat){
         return (Math.floor(0.01 * (2 * stat[0] + stat[1] + Math.floor(0.25 * stat[2])) * 50) + 50 + 10);
     };
 
-    calcStat = function(stat){
+    const calcStat = function(stat){
         nature = 1
         return((Math.floor(0.01 * (2 * stat[0] + stat[1] + Math.floor(0.25 * stat[2])) * 50) + 5) * nature )
     };
@@ -37,15 +58,11 @@ $(document).ready(function(){
     };
     
     $(".stat").each(function(i,stat){
-            $(stat).on("keyup", function(){
+            $(stat).on("change", function(){
                 getStats()
             });
     });
     getStats();
+    updateCount();
+    updatePokemonCount();
 });
-
-// HP = floor(0.01 x 169 x 50) + 50 + 10
-
-// HP = Math.floor(0.01 x (2 x stat[0] + stat[1] + Math.floor(0.25 x stat[2])) x 50) + 50 + 10
-
-// Other Stats = (Math.floor(0.01 x (2 x stat[0] + stat[1] + Math.floor(0.25 x stat[2])) x 50) + 5) x nature

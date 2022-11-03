@@ -78,14 +78,14 @@
         </div>
         <div class="col">
             <%= f.label :item_id, :class => "form-label"  %>
-            <%= f.select( :item_id, Item.pluck(:name,:id),{},{:class => "form-select", :include_blank => true} )%>
+            <%= f.select( :item_id, Item.pluck(:name,:id),{},{:class => "form-select"} )%>
         </div>
     </div>
 </div>
 <h2>Attacks</h2>
-
+<p><span id="check-count">0</span> attacks selected</p>
 <div class="form-text text-center ">** Select a maximum of 4 attacks**</div>
-    <div class="attacks form-check d-flex flex-wrap">
+    <div class="attacks form-check d-flex flex-wrap overflow-auto" id="attack-box">
         <%= f.collection_check_boxes :attack_ids, @pokemon.species.attacks.all.sort, :id, :name do |a| %>
             <div class="container border rounded mt-1 border-secondary col-6">
         <div class="row  bg-opacity-50 bg-secondary rounded-top">
@@ -101,5 +101,6 @@
     </div>
         <% end %>
     </div>
+    
 <%= f.submit "Edit Pokemon", :class => "btn btn-success" %>
 <% end %>
